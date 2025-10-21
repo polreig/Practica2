@@ -277,7 +277,7 @@ graficoEjer4<-ggplot(DatosEjer4,aes(x=Fecha,y=Ventas,color=Fabricante))+geom_poi
 
 print(graficoEjer4)
 
-ggsave(figs/Ejercicio4.pdf)
+ggsave("figs/Ejercicio4.pdf")
 ```
 
 ## Barras de error con **ggplot2**
