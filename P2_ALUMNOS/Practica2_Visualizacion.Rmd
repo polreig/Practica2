@@ -131,20 +131,21 @@ p2
 * Almacena en formato **pdf** el gráfico resultante en un fichero denominado ``Ejercicio1.pdf``.
 
 ```{r Solucion ejercicio 1}
+rm(list=ls())
 library(ggplot2)
 load("data/weatherAUS.RData")
 
-grafico1<- ggplot(data=ds, aes(x=MinTemp,y=MaxTemp))+geom_point()
+grafico1<- ggplot(data=ds, mapping=aes(x=MinTemp,y=MaxTemp))+geom_point()
 
-grafico2<- ggplot(data=ds, aes(x=MinTemp,y=MaxTemp,color=RainTomorrow))+geom_point()
+grafico2<- ggplot(data=ds, mapping=aes(x=MinTemp,y=MaxTemp,color=RainTomorrow))+geom_point()
 
-grafico3<-ggplot(data=ds, aes(x=MinTemp,y=MaxTemp,color=RainTomorrow))+geom_point()+ggtitle("Relación entre Temperatura Mínima y Máxima por Condición de Lluvia")
+grafico3<-ggplot(data=ds, mapping=aes(x=MinTemp,y=MaxTemp,color=RainTomorrow))+geom_point()+ggtitle("Relacion entre Mintemp y Maxtemp")
   
 print(grafico1)
 print(grafico2)
 print(grafico3)
 
-ggsave("Ejercicio1.pdf",plot=grafico3)
+ggsave("figs/Ejercicio1.pdf")
 ```
 
 ### **Ejercicio 2**
@@ -156,7 +157,11 @@ ggsave("Ejercicio1.pdf",plot=grafico3)
 * Almacena en formato **pdf** el gráfico resultante en un fichero denominado ``Ejercicio2.pdf``.
 
 ```{r Solucion ejercicio 2}
+grafico4<-ggplot(data=ds,mapping=aes(x=Temp9am,y=Pressure9am,shape=RainToday,color=RainToday))+geom_point()+ggtitle("Relacion entre Temp9am y Pressure9am")
 
+print(grafico4)
+
+ggsave("figs/Ejercicio2.pdf")
 ```
 
 ### **Ejercicio 3**
