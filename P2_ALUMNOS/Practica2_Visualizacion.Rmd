@@ -176,7 +176,25 @@ ggsave("figs/Ejercicio2.pdf")
 * Almacena en formato **pdf** el gráfico resultante en un fichero denominado ``Ejercicio3.pdf``.
 
 ```{r Solucion ejercicio 3}
+load("data/iris_tidy.RData")
+str(iris.tidy)
 
+iris.grafico1<-ggplot(iris.tidy,aes(x=Species,y=Value))+geom_point()
+
+iris.grafico2<-ggplot(iris.tidy,aes(x=Species,y=Value,color=Part))+geom_point()
+
+iris.grafico2rows<-ggplot(iris.tidy,aes(x=Species,y=Value,color=Part))+geom_point()+facet_grid(rows=vars(Measure))
+
+iris.grafico2cols<-ggplot(iris.tidy,aes(x=Species,y=Value,color=Part))+geom_point()+facet_grid(cols=vars(Measure))
+#en columnas se ve mejor
+
+iris.grafico2jitter<-ggplot(iris.tidy,aes(x=Species,y=Value,color=Part))+geom_jitter()+facet_grid(cols=vars(Measure))
+#ahora se puede ver como los puntos no se juntan en una misma linea, sino que estan dispersos y se observan mejor
+
+print(iris.grafico2cols)
+print(iris.grafico2jitter)
+
+ggsave("figs/Ejercicio3.pdf")
 ```
 
 ## Gráficos de línea con **ggplot2**
