@@ -273,8 +273,6 @@ load("data/Ejercicio4_Data.Rdata")
 graficoEjer4<-ggplot(DatosEjer4,aes(x=Fecha,y=Ventas,color=Fabricante))+geom_point()+geom_line(aes(linetype=Fabricante,color=Fabricante))+ggtitle("Ventas mensuales de diferentes compañías tecnológicas")
 
 
-
-
 print(graficoEjer4)
 
 ggsave("figs/Ejercicio4.pdf")
@@ -318,7 +316,21 @@ Añadir barras de error a un gráfico de línea.
 * Almacena en formato **pdf** el gráfico resultante en un fichero denominado ``Ejercicio5.pdf``.
 
 ```{r Solucion ejercicio 5}
+load("data/Experimento.Rdata")
 
+grafico5.1<-ggplot(Experimento,aes(x=Dosis,y=Altura,color=Complemento,linetype=Complemento,shape=Complemento))+geom_point(size=3)+geom_line(size=1)+labs(title="Gráfico 1: Altura vs Dosis por Complemento",subtitle="Tipo de línea y forma de punto incluidos en aes()")
+
+print(grafico5.1)
+
+grafico5.2<-ggplot(Experimento,aes(x=Dosis,y=Altura,color=Complemento,linetype=Complemento,shape=Complemento))+geom_point(size=3)+geom_line(size=1)+geom_errorbar(aes(ymin=Altura-Error_Altura,ymax=Altura+Error_Altura),width=0.1)+labs(title="Gráfico 2: Altura vs Dosis con Barras de Error",subtitle="Incluye error estándar de la altura")
+
+print(grafico5.2)
+
+grafico5.3<-ggplot(Experimento,aes(x=Dosis,y=Altura,color=Complemento))+geom_point(aes(shape=Complemento),size=3)+geom_line(aes(linetype=Complemento),size=1)+geom_errorbar(aes(ymin=Altura-Error_Altura,ymax=Altura+Error_Altura),width=0.1)+scale_color_brewer(palette="Reds")+labs(title="Gráfico 3: Altura vs Dosis con Paleta de Rojos",subtitle="Tipo de línea y forma fuera del aes() principal")
+
+print(grafico5.3)
+
+ggsave("figs/Ejercicio5.pdf")
 ```
 
 ## Gráficos de boxplot con **ggplot2**
@@ -334,7 +346,23 @@ En esta sección vamos a utilizar **ggplot2** para representar distribuciones de
 * Almacena en formato **pdf** el gráfico resultante en un fichero denominado ``Ejercicio6.pdf``.
 
 ```{r Solucion ejercicio 6}
+load("data/iceRiver.RData")
 
+#?tseries::ice.river
+
+graficoEjer6 <- ggplot(ice.river.df, aes(x = time))+geom_line(aes(y=flow.vat),color='red')+geom_line(aes(y=flow.jok),color='blue')+labs(
+    title = "Caudal de Ríos Islandeses (1972-1974)",
+    subtitle = "Comparación del caudal diario de Jokulsa (azul) y Vatnsdalsa (rojo)",
+    x = "Fecha",
+    y = "Caudal (m³/s)",
+    caption = "Fuente: tseries::ice.river - Período: 1972-1974"
+  )
+
+
+
+print(graficoEjer6)
+
+ggsave("figs/Ejercicio6.pdf")
 ```
 
 ## Histogramas con **ggplot2**
@@ -402,7 +430,21 @@ ggplot(data=dataset_hist1, aes(x=AGE)) +
 * Almacena en formato **pdf** el gráfico resultante en un fichero denominado ``Ejercicio7.pdf``.
 
 ```{r Solucion ejercicio 7}
+load("data/weatherAUS_distributions.RData", verbose = TRUE)
 
+grafico_boxplot<-ggplot(ds,aes(x=factor(Year),y=MinTemp))+geom_boxplot()+labs(title="Distribución de Temperaturas Mínimas por Año",x="Año",y="Temperatura Mínima (°C)")
+
+print(grafico_boxplot)
+
+grafico_violin<-ggplot(ds,aes(x=factor(Year),y=MaxTemp,fill=factor(Year)))+geom_violin()+labs(title="Distribución de temperaturas máximas por año",x="Año",y="Temperatura (ºC)")
+
+print(grafico_violin)
+
+grafico_final<-ggplot(ds,aes(x=factor(Year),y=MaxTemp,fill=factor(Year)))+geom_violin()+labs(title="Distribución de temperaturas máximas por año",x="Año",y="Temperatura (ºC)")+theme(legend.position="none",axis.text.x=element_text(angle=45,hjust=1))
+
+print(grafico_final)
+
+ggsave("figs/Ejercicio7.pdf")
 ```
 
 ## Gráficos de barras con **ggplot2**
